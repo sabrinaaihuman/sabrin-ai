@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SABRIN AI</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 700px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #94a3b8;
+      font-size: 18px;
+    }
+
+    .chat {
+      margin-top: 30px;
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    input {
+      width: 70%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 14px 20px;
+      margin-left: 5px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #response {
+      margin-top: 20px;
+      min-height: 30px;
+      color: #cbd5e1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🤖 SABRIN AI</h1>
+
+    <p>Your personal AI assistant</p>
+
+    <div class="chat">
+
+      <input
+        id="question"
+        type="text"
+        placeholder="Ask SABRIN AI something..."
+      >
+
+      <button onclick="askAI()">Ask</button>
+
+      <div id="response"></div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function askAI() {
+
+      const question =
+        document.getElementById("question").value.trim();
+
+      const response =
+        document.getElementById("response");
+
+      if (!question) {
+        response.innerText = "Please ask me something.";
+        return;
+      }
+
+      response.innerText =
+        "SABRIN AI received: " + question;
+    }
+  </script>
+
+</body>
+</html>
