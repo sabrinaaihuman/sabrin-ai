@@ -1,112 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SABRIN AI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SABRIN AI</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b1020;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    .container {
-      width: 90%;
-      max-width: 700px;
-      text-align: center;
-    }
+        .container {
+            width: 90%;
+            max-width: 850px;
+            text-align: center;
+        }
 
-    h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
+        h1 {
+            font-size: 55px;
+            margin-bottom: 5px;
+        }
 
-    p {
-      color: #94a3b8;
-      font-size: 18px;
-    }
+        .subtitle {
+            color: #aab4d4;
+            margin-bottom: 35px;
+        }
 
-    .chat {
-      margin-top: 30px;
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 15px;
-    }
+        .chatbox {
+            background: #151c32;
+            border: 1px solid #293452;
+            border-radius: 18px;
+            padding: 25px;
+            text-align: left;
+        }
 
-    input {
-      width: 70%;
-      padding: 14px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-    }
+        #output {
+            min-height: 120px;
+            padding: 20px;
+            background: #0e1426;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            color: #dce4ff;
+        }
 
-    button {
-      padding: 14px 20px;
-      margin-left: 5px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
 
-    #response {
-      margin-top: 20px;
-      min-height: 30px;
-      color: #cbd5e1;
-    }
-  </style>
+        input {
+            flex: 1;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #394565;
+            background: #0d1324;
+            color: white;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 15px 22px;
+            border: none;
+            border-radius: 10px;
+            background: #4f7cff;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #3d68df;
+        }
+
+        .footer {
+            margin-top: 25px;
+            color: #727d9d;
+            font-size: 13px;
+        }
+    </style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
     <h1>🤖 SABRIN AI</h1>
 
-    <p>Your personal AI assistant</p>
+    <p class="subtitle">
+        Intelligent AI Assistant by Human Tech
+    </p>
 
-    <div class="chat">
+    <div class="chatbox">
 
-      <input
-        id="question"
-        type="text"
-        placeholder="Ask SABRIN AI something..."
-      >
+        <div id="output">
+            Hello! I'm SABRIN AI. How can I help you?
+        </div>
 
-      <button onclick="askAI()">Ask</button>
+        <div class="input-area">
+            <input
+                id="userInput"
+                type="text"
+                placeholder="Ask SABRIN AI something..."
+                onkeydown="if(event.key === 'Enter') askAI()"
+            >
 
-      <div id="response"></div>
+            <button onclick="askAI()">Ask</button>
+        </div>
 
     </div>
 
-  </div>
+    <div class="footer">
+        © 2026 SABRIN AI BY Human Tech
+    </div>
 
-  <script>
-    function askAI() {
+</div>
 
-      const question =
-        document.getElementById("question").value.trim();
+<script>
+function askAI() {
 
-      const response =
-        document.getElementById("response");
+    const input = document.getElementById("userInput");
+    const output = document.getElementById("output");
 
-      if (!question) {
-        response.innerText = "Please ask me something.";
+    const question = input.value.trim();
+
+    if (question === "") {
+        output.innerText = "Please type something first.";
         return;
-      }
-
-      response.innerText =
-        "SABRIN AI received: " + question;
     }
-  </script>
+
+    output.innerText =
+        "SABRIN AI received your message:\n\n" + question +
+        "\n\nAI engine connection will be added next.";
+
+    input.value = "";
+}
+</script>
 
 </body>
 </html>
