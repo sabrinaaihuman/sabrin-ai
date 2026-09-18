@@ -1,147 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SABRIN AI</title>
+async function askAI() {
+  const input = document.getElementById("userInput");
+  const output = document.getElementById("output");
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0b1020;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+  const question = input.value.trim();
 
-        .container {
-            width: 90%;
-            max-width: 850px;
-            text-align: center;
-        }
+  if (!question) {
+    output.innerText = "Please type something first.";
+    return;
+  }
 
-        h1 {
-            font-size: 55px;
-            margin-bottom: 5px;
-        }
+  output.innerText = "SABRIN AI is thinking...";
+  input.value = "";
 
-        .subtitle {
-            color: #aab4d4;
-            margin-bottom: 35px;
-        }
+  try {
+    const response = await fetch(
+      "https://sabrin-ai.hexmission.workers.dev/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: question
+        })
+      }
+    );
 
-        .chatbox {
-            background: #151c32;
-            border: 1px solid #293452;
-            border-radius: 18px;
-            padding: 25px;
-            text-align: left;
-        }
+    const data = await response.json();
 
-        #output {
-            min-height: 120px;
-            padding: 20px;
-            background: #0e1426;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            color: #dce4ff;
-        }
-
-        .input-area {
-            display: flex;
-            gap: 10px;
-        }
-
-        input {
-            flex: 1;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #394565;
-            background: #0d1324;
-            color: white;
-            font-size: 16px;
-        }
-
-        button {
-            padding: 15px 22px;
-            border: none;
-            border-radius: 10px;
-            background: #4f7cff;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #3d68df;
-        }
-
-        .footer {
-            margin-top: 25px;
-            color: #727d9d;
-            font-size: 13px;
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="container">
-
-    <h1>🤖 SABRIN AI</h1>
-
-    <p class="subtitle">
-        Intelligent AI Assistant by Human Tech
-    </p>
-
-    <div class="chatbox">
-
-        <div id="output">
-            Hello! I'm SABRIN AI. How can I help you?
-        </div>
-
-        <div class="input-area">
-            <input
-                id="userInput"
-                type="text"
-                placeholder="Ask SABRIN AI something..."
-                onkeydown="if(event.key === 'Enter') askAI()"
-            >
-
-            <button onclick="askAI()">Ask</button>
-        </div>
-
-    </div>
-
-    <div class="footer">
-        © 2026 SABRIN AI BY Human Tech
-    </div>
-
-</div>
-
-<script>
-function askAI() {
-
-    const input = document.getElementById("userInput");
-    const output = document.getElementById("output");
-
-    const question = input.value.trim();
-
-    if (question === "") {
-        output.innerText = "Please type something first.";
-        return;
+    if (!response.ok) {
+      throw new Error(data.error || "Request failed");
     }
 
+    output.innerText = data.answer;
+
+  } catch (error) {
+    console.error(error);
     output.innerText =
-        "SABRIN AI received your message:\n\n" + question +
-        "\n\nAI engine connection will be added next.";
-
-    input.value = "";
+      "Sorry, SABRIN AI could not connect right now.";
+  }
 }
-</script>
-
-</body>
-</html>
